@@ -35,4 +35,7 @@ class Restaurant {
       _ => throw const FormatException(' Failed to Load Restaurant Data')
     };
   }
+
+  String get imageUrl =>
+      'https://restaurant-api.dicoding.dev/images/large/$pictureId';
 }
