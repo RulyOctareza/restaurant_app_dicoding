@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/theme/colors/restaurant_colors.dart';
+import 'package:restaurant_app/style/colors/restaurant_colors.dart';
 
-import 'typhography/restaurant_text_style.dart';
+import '../typhography/restaurant_text_style.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
