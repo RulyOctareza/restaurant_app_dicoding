@@ -16,24 +16,13 @@ class Restaurant {
   });
 
   factory Restaurant.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        'id': String id,
-        'name': String name,
-        'description': String description,
-        'pictureId': String pictureId,
-        'city': String city,
-        'rating': double rating,
-      } =>
-        Restaurant(
-            id: id,
-            name: name,
-            description: description,
-            pictureId: pictureId,
-            city: city,
-            rating: rating),
-      _ => throw const FormatException(' Failed to Load Restaurant Data')
-    };
+    return Restaurant(
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        pictureId: json['pictureId'],
+        city: json['city'],
+        rating: json['rating']?.toDouble());
   }
 
   String get imageUrl =>
