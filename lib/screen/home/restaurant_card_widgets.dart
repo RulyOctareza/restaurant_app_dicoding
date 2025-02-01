@@ -16,7 +16,7 @@ class RestaurantCardWidgets extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
         child: Row(
           children: [
             ClipRRect(
@@ -47,11 +47,11 @@ class RestaurantCardWidgets extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // Image.asset(
-                            //   'assets/icon_star.png',
-                            //   width: 22,
-                            //   height: 22,
-                            // ),
+                            Image.asset(
+                              'assets/icon_star.png',
+                              width: 22,
+                              height: 22,
+                            ),
                             Text(
                               restaurants.rating.toString(),
                               style: whiteTextStyle.copyWith(
@@ -66,27 +66,30 @@ class RestaurantCardWidgets extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 14),
             Expanded(
-              // Menambahkan Expanded untuk membatasi teks agar sesuai dengan lebar yang tersedia
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     restaurants.name,
-
-                    style: whiteTextStyle,
-                    overflow:
-                        TextOverflow.ellipsis, // Tambahkan overflow ellipsis
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    restaurants.city,
-                    style: greyTextStyle.copyWith(
-                      fontSize: 12,
+                    style: regularTextStyle.copyWith(
+                      fontSize: 18,
                     ),
-                    overflow:
-                        TextOverflow.ellipsis, // Tambahkan overflow ellipsis
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 5),
+                  Row(
+                    children: [
+                      const Icon(Icons.location_on),
+                      Text(
+                        restaurants.city,
+                        style: greyTextStyle.copyWith(
+                          fontSize: 14,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 25),
                 ],

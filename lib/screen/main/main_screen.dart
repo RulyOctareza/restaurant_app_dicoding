@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/screen/home/restaurant_card_widgets.dart';
 import '../../style/typhography/restaurant_text_style.dart';
 
 class MainScreen extends StatelessWidget {

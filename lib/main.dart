@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
+import 'package:restaurant_app/provider/theme/theme_provider.dart';
 import 'package:restaurant_app/screen/detail/detail_screen.dart';
 import 'package:restaurant_app/screen/home/home_screen.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
@@ -16,6 +17,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (_) => IndexNavProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ThemeProvider(),
         ),
         Provider(
           create: (_) => ApiServices(),
@@ -41,14 +45,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       title: 'Restaurant App',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: themeProvider.themeMode,
       initialRoute: NavigationRoute.homeRoute.name,
       routes: {
         NavigationRoute.homeRoute.name: (context) => const HomeScreen(),
+        NavigationRoute.detailRoute.name: (context) => DetailScreen(
+              restaurantId:
+                  ModalRoute.of(context)?.settings.arguments as String,
+            ),
       },
     );
   }
