@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
 import 'package:restaurant_app/screen/detail/body_of_detail_screen_widget.dart';
 import 'package:restaurant_app/static/restaurant_detail_result_state.dart';
 
 import '../../provider/detail/restaurant_detail_provider.dart';
+import '../Error/error_page.dart';
 
 class DetailScreen extends StatefulWidget {
   final String restaurantId;
@@ -35,24 +37,12 @@ class _DetailScreenState extends State<DetailScreen> {
           RestaurantDetailLoadingState() => const Center(
               child: CircularProgressIndicator(),
             ),
-          RestaurantDetailErrorState(error: var message) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.error_outline,
-                    size: 50,
-                    color: Colors.red,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    message,
-                    style: const TextStyle(fontSize: 18),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                ],
-              ),
+          RestaurantDetailErrorState(error: var message) => ErrorPage(
+              errorMessage: message,
+              onRetry: () {
+                // Coba muat ulang data
+                context.read<RestaurantListProvider>().fetchRestaurantList();
+              },
             ),
           RestaurantDetailLoadedState(data: var restaurants) =>
             BodyOfDetailScreenWidget(restaurant: restaurants),

@@ -69,9 +69,10 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
+                      Image.asset(
+                        'assets/icon_star.png',
+                        width: 26,
+                        height: 26,
                       ),
                       const SizedBox.square(dimension: 9),
                       Text(

@@ -6,6 +6,8 @@ import 'package:restaurant_app/static/restaurant_list_result_state.dart';
 import 'package:restaurant_app/provider/theme/theme_provider.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 
+import '../Error/error_page.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -68,33 +70,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
-            RestaurantListErrorState(error: var message) => Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.error_outline,
-                      size: 50,
-                      color: Colors.red,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      message,
-                      style: const TextStyle(fontSize: 18),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Coba muat ulang data
-                        context
-                            .read<RestaurantListProvider>()
-                            .fetchRestaurantList();
-                      },
-                      child: const Text('Coba Lagi'),
-                    ),
-                  ],
-                ),
+            RestaurantListErrorState(error: var message) => ErrorPage(
+                errorMessage: message,
+                onRetry: () {
+                  // Coba muat ulang data
+                  context.read<RestaurantListProvider>().fetchRestaurantList();
+                },
               ),
             _ => const Center(
                 child: Text('Tidak ada data yang tersedia.'),
