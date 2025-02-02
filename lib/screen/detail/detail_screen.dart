@@ -40,7 +40,6 @@ class _DetailScreenState extends State<DetailScreen> {
           RestaurantDetailErrorState(error: var message) => ErrorPage(
               errorMessage: message,
               onRetry: () {
-                // Coba muat ulang data
                 context.read<RestaurantListProvider>().fetchRestaurantList();
               },
             ),

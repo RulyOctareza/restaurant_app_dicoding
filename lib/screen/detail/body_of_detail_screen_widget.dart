@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/model/restaurant_model.dart';
+import 'package:restaurant_app/data/model/restaurant/restaurant_model.dart';
 import 'package:restaurant_app/screen/widgets/category_card.dart';
 import 'package:restaurant_app/screen/widgets/menu_card.dart';
 import 'package:restaurant_app/screen/widgets/review_card.dart';
@@ -23,9 +23,12 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Image.network(
-                  restaurant.imageUrllarge,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: 'restaurant-image-${restaurant.id}',
+                  child: Image.network(
+                    restaurant.imageUrllarge,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               const SizedBox.square(dimension: 16),
@@ -63,7 +66,7 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                         restaurant.address,
                         style: regularTextStyle.copyWith(fontSize: 16),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 8),
                       CategoryCard(categories: restaurant.categories ?? []),
                     ],
                   ),
@@ -84,10 +87,11 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox.square(dimension: 16),
+              const SizedBox.square(dimension: 8),
               Text(
                 restaurant.description,
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.justify,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 8,
               ),

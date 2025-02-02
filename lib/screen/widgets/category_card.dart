@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/data/model/restaurant/restaurant_category_model.dart';
 import 'package:restaurant_app/style/typhography/restaurant_text_style.dart';
-
-import '../../data/model/restaurant_model.dart';
 
 class CategoryCard extends StatelessWidget {
   final List<Category> categories;

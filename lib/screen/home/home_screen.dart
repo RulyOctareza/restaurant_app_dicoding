@@ -5,7 +5,6 @@ import 'package:restaurant_app/screen/home/restaurant_card_widgets.dart';
 import 'package:restaurant_app/static/restaurant_list_result_state.dart';
 import 'package:restaurant_app/provider/theme/theme_provider.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
-
 import '../Error/error_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,6 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
           'Restaurant List',
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.pushNamed(context, '/searchpage');
+            },
+          ),
           IconButton(
             onPressed: () {
               themeProvider.toggleTheme();
@@ -73,7 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
             RestaurantListErrorState(error: var message) => ErrorPage(
                 errorMessage: message,
                 onRetry: () {
-                  // Coba muat ulang data
                   context.read<RestaurantListProvider>().fetchRestaurantList();
                 },
               ),

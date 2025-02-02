@@ -1,3 +1,8 @@
+import 'package:restaurant_app/data/model/restaurant/restaurant_review_dart';
+
+import 'restaurant_category_model.dart';
+import 'restaurant_menu_model.dart';
+
 class Restaurant {
   final String id;
   final String name;
@@ -54,80 +59,5 @@ class Restaurant {
   String get imageUrllarge {
     final url = 'https://restaurant-api.dicoding.dev/images/small/$pictureId';
     return url;
-  }
-}
-
-class Category {
-  final String name;
-
-  Category({required this.name});
-
-  factory Category.fromJson(Map<String, dynamic> json) => Category(
-        name: json["name"],
-      );
-}
-
-class Menus {
-  final List<Food> foods;
-  final List<Drink> drinks;
-
-  Menus({
-    required this.foods,
-    required this.drinks,
-  });
-
-  factory Menus.fromJson(Map<String, dynamic> json) {
-    return Menus(
-      foods: List<Food>.from(json['foods'].map((x) => Food.fromJson(x))),
-      drinks: List<Drink>.from(json['drinks'].map((x) => Drink.fromJson(x))),
-    );
-  }
-}
-
-class Food {
-  final String name;
-
-  Food({
-    required this.name,
-  });
-
-  factory Food.fromJson(Map<String, dynamic> json) {
-    return Food(
-      name: json['name'],
-    );
-  }
-}
-
-class Drink {
-  final String name;
-
-  Drink({
-    required this.name,
-  });
-
-  factory Drink.fromJson(Map<String, dynamic> json) {
-    return Drink(
-      name: json['name'],
-    );
-  }
-}
-
-class CustomerReview {
-  final String name;
-  final String review;
-  final String date;
-
-  CustomerReview({
-    required this.name,
-    required this.review,
-    required this.date,
-  });
-
-  factory CustomerReview.fromJson(Map<String, dynamic> json) {
-    return CustomerReview(
-      name: json['name'],
-      review: json['review'],
-      date: json['date'],
-    );
   }
 }

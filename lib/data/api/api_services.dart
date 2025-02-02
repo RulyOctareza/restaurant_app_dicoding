@@ -33,17 +33,12 @@ class ApiServices {
   Future<RestaurantDetailResponse> getRestaurantDetail(String id) async {
     try {
       final url = "$_baseUrl/detail/$id";
-      // Debug URL
 
       final response =
           await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
 
-      // Debug status code
-      // Debug response body
-
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
-        // Debug decoded JSON
 
         return RestaurantDetailResponse.fromJson(jsonData);
       } else {

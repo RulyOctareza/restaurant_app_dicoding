@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/model/restaurant_model.dart';
+import 'package:restaurant_app/data/model/restaurant/restaurant_model.dart';
 import 'package:restaurant_app/style/colors/restaurant_colors.dart';
 
 import '../../style/typhography/restaurant_text_style.dart';
@@ -26,12 +26,9 @@ class RestaurantCardWidgets extends StatelessWidget {
                 height: 110,
                 child: Stack(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(restaurants.imageUrlsmall),
-                              fit: BoxFit.cover)),
-                    ),
+                    Hero(
+                        tag: 'restaurant-image-${restaurants.id}',
+                        child: Image.network(restaurants.imageUrllarge)),
                     Align(
                       alignment: Alignment.topRight,
                       child: Container(

@@ -1,4 +1,4 @@
-import 'package:restaurant_app/data/model/restaurant_model.dart';
+import 'package:restaurant_app/data/model/restaurant/restaurant_model.dart';
 
 class RestaurantDetailResponse {
   final bool error;

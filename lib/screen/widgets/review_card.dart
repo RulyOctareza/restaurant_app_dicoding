@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/model/restaurant_model.dart';
+import 'package:restaurant_app/data/model/restaurant/restaurant_review_dart';
 
 class ReviewCard extends StatelessWidget {
   final List<CustomerReview> reviews;
