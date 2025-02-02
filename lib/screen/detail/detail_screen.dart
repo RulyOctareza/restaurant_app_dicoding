@@ -36,7 +36,23 @@ class _DetailScreenState extends State<DetailScreen> {
               child: CircularProgressIndicator(),
             ),
           RestaurantDetailErrorState(error: var message) => Center(
-              child: Text(message),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.error_outline,
+                    size: 50,
+                    color: Colors.red,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    message,
+                    style: const TextStyle(fontSize: 18),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
             ),
           RestaurantDetailLoadedState(data: var restaurants) =>
             BodyOfDetailScreenWidget(restaurant: restaurants),

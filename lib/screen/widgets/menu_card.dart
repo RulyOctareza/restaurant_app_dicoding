@@ -19,7 +19,7 @@ class MenuCard extends StatelessWidget {
         Column(
           children: [
             Wrap(
-              spacing: 4,
+              spacing: 8,
               children: [
                 ...menus.foods.map((food) => Chip(
                       label: Text(food.name),

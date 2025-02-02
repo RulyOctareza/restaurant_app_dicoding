@@ -19,8 +19,7 @@ class ReviewCard extends StatelessWidget {
         Column(
           children: reviews
               .map((review) => Card(
-                    color: Colors.amberAccent,
-                    elevation: 3,
+                    elevation: 4,
                     child: ListTile(
                       title: Text(review.name),
                       subtitle: Text(review.review),

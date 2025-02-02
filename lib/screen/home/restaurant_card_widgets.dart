@@ -89,13 +89,15 @@ class RestaurantCardWidgets extends StatelessWidget {
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      const Icon(Icons.location_on),
-                      Text(
-                        restaurants.city,
-                        style: greyTextStyle.copyWith(
-                          fontSize: 14,
-                        ),
-                        overflow: TextOverflow.ellipsis,
+                      Wrap(
+                        children: [
+                          const Icon(Icons.location_on),
+                          Text(
+                            restaurants.city,
+                            style: regularTextStyle,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
                     ],
                   ),

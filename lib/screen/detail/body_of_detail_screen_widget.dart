@@ -20,7 +20,7 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, // Align to the start
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
                 child: Image.network(
@@ -30,14 +30,11 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
               ),
               const SizedBox.square(dimension: 16),
               Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween, // Adjust alignment
-                crossAxisAlignment:
-                    CrossAxisAlignment.start, // Align to the start
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start, // Align to the start
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         restaurant.name,
@@ -66,7 +63,7 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                         restaurant.address,
                         style: regularTextStyle.copyWith(fontSize: 16),
                       ),
-                      const SizedBox(height: 16), // Add spacing
+                      const SizedBox(height: 16),
                       CategoryCard(categories: restaurant.categories ?? []),
                     ],
                   ),

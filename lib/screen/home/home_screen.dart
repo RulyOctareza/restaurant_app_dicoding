@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
 import 'package:restaurant_app/screen/home/restaurant_card_widgets.dart';
 import 'package:restaurant_app/static/restaurant_list_result_state.dart';
-
-import '../../provider/theme/theme_provider.dart';
-import '../../static/navigation_route.dart';
+import 'package:restaurant_app/provider/theme/theme_provider.dart';
+import 'package:restaurant_app/static/navigation_route.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Restaurant List'),
+        title: const Text(
+          'Restaurant List',
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -44,32 +45,63 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Consumer<RestaurantListProvider>(builder: (context, value, child) {
-        return switch (value.resultState) {
-          RestaurantListLoadedState(data: var restautantList) =>
-            ListView.builder(
-              itemCount: restautantList.length,
-              itemBuilder: (context, index) {
-                final restaurant = restautantList[index];
-
-                return RestaurantCardWidgets(
-                  restaurants: restaurant,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      NavigationRoute.detailRoute.name,
-                      arguments: restaurant.id,
-                    );
-                  },
-                );
-              },
-            ),
-          RestaurantListErrorState(error: var message) => Center(
-              child: Text(message),
-            ),
-          _ => const SizedBox(),
-        };
-      }),
+      body: Consumer<RestaurantListProvider>(
+        builder: (context, value, child) {
+          return switch (value.resultState) {
+            RestaurantListLoadingState() => const Center(
+                child: CircularProgressIndicator(),
+              ),
+            RestaurantListLoadedState(data: var restaurantList) =>
+              ListView.builder(
+                itemCount: restaurantList.length,
+                itemBuilder: (context, index) {
+                  final restaurant = restaurantList[index];
+                  return RestaurantCardWidgets(
+                    restaurants: restaurant,
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        NavigationRoute.detailRoute.name,
+                        arguments: restaurant.id,
+                      );
+                    },
+                  );
+                },
+              ),
+            RestaurantListErrorState(error: var message) => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.error_outline,
+                      size: 50,
+                      color: Colors.red,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      message,
+                      style: const TextStyle(fontSize: 18),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Coba muat ulang data
+                        context
+                            .read<RestaurantListProvider>()
+                            .fetchRestaurantList();
+                      },
+                      child: const Text('Coba Lagi'),
+                    ),
+                  ],
+                ),
+              ),
+            _ => const Center(
+                child: Text('Tidak ada data yang tersedia.'),
+              ),
+          };
+        },
+      ),
     );
   }
 }
