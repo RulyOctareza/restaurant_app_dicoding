@@ -4,12 +4,12 @@ import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
 import 'package:restaurant_app/provider/theme/theme_provider.dart';
 import 'package:restaurant_app/screen/detail/detail_screen.dart';
-import 'package:restaurant_app/screen/home/home_screen.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 import 'package:restaurant_app/style/theme/restaurant_theme.dart';
 
 import 'data/api/api_services.dart';
 import 'provider/main/index_nav_provider.dart';
+import 'screen/home/home_screen.dart';
 
 void main() {
   runApp(
@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         NavigationRoute.homeRoute.name: (context) => const HomeScreen(),
         NavigationRoute.detailRoute.name: (context) => DetailScreen(
               restaurantId:
-                  ModalRoute.of(context)?.settings.arguments as String,
+                  ModalRoute.of(context)?.settings.arguments as String? ?? '',
             ),
       },
     );

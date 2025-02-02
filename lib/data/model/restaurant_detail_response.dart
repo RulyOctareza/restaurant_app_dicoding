@@ -11,11 +11,17 @@ class RestaurantDetailResponse {
     required this.restaurant,
   });
 
-  factory RestaurantDetailResponse.fromJson(Map<String, dynamic> json) {
-    return RestaurantDetailResponse(
-      error: json['error'],
-      message: json['message'],
-      restaurant: Restaurant.fromJson(json['restaurant']),
-    );
-  }
+  // String toJson() => json.encode(toMap());
+
+  factory RestaurantDetailResponse.fromJson(Map<String, dynamic> json) =>
+      RestaurantDetailResponse(
+          error: json["error"],
+          message: json["message"],
+          restaurant: Restaurant.fromJson(json["restaurant"]));
+
+  Map<String, dynamic> toMap() => {
+        "error": error,
+        "message": message,
+        "restaurant": restaurant,
+      };
 }

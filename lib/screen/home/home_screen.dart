@@ -19,8 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    Future.microtask(() {
-      context.read<RestaurantListProvider>().fetchRestaurantList();
+    Future.microtask(() async {
+      if (!mounted) {
+        return;
+      }
+      await context.read<RestaurantListProvider>().fetchRestaurantList();
     });
   }
 
@@ -53,8 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   restaurants: restaurant,
                   onTap: () {
                     Navigator.pushNamed(
-                        context, NavigationRoute.detailRoute.name,
-                        arguments: restaurant.id);
+                      context,
+                      NavigationRoute.detailRoute.name,
+                      arguments: restaurant.id,
+                    );
                   },
                 );
               },

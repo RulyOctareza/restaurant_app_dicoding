@@ -6,7 +6,7 @@ import '../../style/typhography/restaurant_text_style.dart';
 
 class RestaurantCardWidgets extends StatelessWidget {
   final Restaurant restaurants;
-  final Function onTap;
+  final VoidCallback onTap;
 
   const RestaurantCardWidgets(
       {super.key, required this.restaurants, required this.onTap});
@@ -14,7 +14,7 @@ class RestaurantCardWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
         child: Row(
@@ -29,7 +29,7 @@ class RestaurantCardWidgets extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: NetworkImage(restaurants.imageUrl),
+                              image: NetworkImage(restaurants.imageUrlsmall),
                               fit: BoxFit.cover)),
                     ),
                     Align(
@@ -79,6 +79,14 @@ class RestaurantCardWidgets extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 5),
+                  Text(
+                    restaurants.description,
+                    style: regularTextStyle.copyWith(
+                      fontSize: 12,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 12),
                   Row(
                     children: [
                       const Icon(Icons.location_on),

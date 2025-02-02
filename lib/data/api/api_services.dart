@@ -5,14 +5,14 @@ import 'package:restaurant_app/data/model/restaurant_detail_response.dart';
 import 'package:restaurant_app/data/model/restaurant_list_response.dart';
 
 class ApiServices {
-  static const String _baseUrl = 'https://restaurant-api.dicoding.dev/';
+  static const String _baseUrl = 'https://restaurant-api.dicoding.dev';
 
   /// Mengambil daftar restoran
   Future<RestaurantListResponse> getRestaurantList() async {
     try {
       final response = await http
           .get(Uri.parse('$_baseUrl/list'))
-          .timeout(const Duration(seconds: 10)); // Tambahkan timeout
+          .timeout(const Duration(seconds: 10));
 
       if (response.statusCode == 200) {
         return RestaurantListResponse.fromJson(jsonDecode(response.body));
@@ -32,22 +32,26 @@ class ApiServices {
   /// Mengambil detail restoran berdasarkan ID
   Future<RestaurantDetailResponse> getRestaurantDetail(String id) async {
     try {
-      final response = await http
-          .get(Uri.parse("$_baseUrl/detail/$id"))
-          .timeout(const Duration(seconds: 10));
+      final url = "$_baseUrl/detail/$id";
+      // Debug URL
+
+      final response =
+          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+
+      // Debug status code
+      // Debug response body
 
       if (response.statusCode == 200) {
-        return RestaurantDetailResponse.fromJson(jsonDecode(response.body));
+        final jsonData = jsonDecode(response.body);
+        // Debug decoded JSON
+
+        return RestaurantDetailResponse.fromJson(jsonData);
       } else {
         throw Exception(
             'Failed to load restaurant detail (Code: ${response.statusCode})');
       }
-    } on SocketException {
-      throw Exception('No Internet Connection');
-    } on HttpException {
-      throw Exception('Couldn\'t find the server');
-    } on FormatException {
-      throw Exception('Bad response format');
+    } catch (e) {
+      rethrow;
     }
   }
 }
