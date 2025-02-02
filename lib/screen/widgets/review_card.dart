@@ -8,31 +8,29 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      margin: const EdgeInsets.all(8),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Customer Reviews',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Column(
-              children: reviews
-                  .map((review) => ListTile(
-                        title: Text(review.name),
-                        subtitle: Text(review.review),
-                        trailing: Text(review.date),
-                      ))
-                  .toList(),
-            ),
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 12),
+        const Text(
+          'Customer Reviews :',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-      ),
+        Column(
+          children: reviews
+              .map((review) => Card(
+                    color: Colors.amberAccent,
+                    elevation: 3,
+                    child: ListTile(
+                      title: Text(review.name),
+                      subtitle: Text(review.review),
+                      trailing: Text(review.date),
+                    ),
+                  ))
+              .toList(),
+        ),
+        const SizedBox(height: 5),
+      ],
     );
   }
 }

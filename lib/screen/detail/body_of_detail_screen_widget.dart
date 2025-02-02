@@ -20,50 +20,55 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start, // Align to the start
             children: [
-              Image.network(
-                restaurant.imageUrllarge,
-                fit: BoxFit.cover,
+              Center(
+                child: Image.network(
+                  restaurant.imageUrllarge,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox.square(dimension: 16),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceBetween, // Adjust alignment
+                crossAxisAlignment:
+                    CrossAxisAlignment.start, // Align to the start
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          restaurant.name,
-                          style: regularTextStyle.copyWith(
-                              fontSize: 28, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
-                            const Icon(Icons.location_city),
-                            const SizedBox(
-                              width: 8,
+                  Column(
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start, // Align to the start
+                    children: [
+                      Text(
+                        restaurant.name,
+                        style: regularTextStyle.copyWith(
+                            fontSize: 28, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          const Icon(Icons.location_on),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            restaurant.city,
+                            style: regularTextStyle.copyWith(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
                             ),
-                            Text(
-                              restaurant.city,
-                              style: regularTextStyle.copyWith(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          restaurant.address,
-                          style: regularTextStyle.copyWith(fontSize: 16),
-                        ),
-                        CategoryCard(categories: restaurant.categories ?? []),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        restaurant.address,
+                        style: regularTextStyle.copyWith(fontSize: 16),
+                      ),
+                      const SizedBox(height: 16), // Add spacing
+                      CategoryCard(categories: restaurant.categories ?? []),
+                    ],
                   ),
                   Row(
                     children: [
