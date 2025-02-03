@@ -49,22 +49,4 @@ class ApiServices {
       rethrow;
     }
   }
-
-  Future<void> addReview(String id, String name, String review) async {
-    final response = await http.post(
-      Uri.parse('https://restaurant-api.dicoding.dev/review'),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: json.encode({
-        'id': id,
-        'name': name,
-        'review': review,
-      }),
-    );
-
-    if (response.statusCode != 200) {
-      throw Exception('Gagal menambahkan review');
-    }
-  }
 }

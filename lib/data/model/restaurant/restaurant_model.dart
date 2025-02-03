@@ -1,4 +1,4 @@
-import 'package:restaurant_app/data/model/restaurant/restaurant_review_dart';
+import 'package:restaurant_app/data/model/restaurant/restaurant_review.dart';
 
 import 'restaurant_category_model.dart';
 import 'restaurant_menu_model.dart';

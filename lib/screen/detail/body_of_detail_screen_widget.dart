@@ -1,20 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/restaurant/restaurant_model.dart';
+import 'package:restaurant_app/provider/reviews/add_review_provider.dart';
+import 'package:restaurant_app/screen/widgets/add_review_form.dart';
 import 'package:restaurant_app/screen/widgets/category_card.dart';
 import 'package:restaurant_app/screen/widgets/menu_card.dart';
 import 'package:restaurant_app/screen/widgets/review_card.dart';
 import 'package:restaurant_app/style/typhography/restaurant_text_style.dart';
 
-class BodyOfDetailScreenWidget extends StatelessWidget {
+class BodyOfDetailScreenWidget extends StatefulWidget {
+  final Restaurant restaurant;
   const BodyOfDetailScreenWidget({
     super.key,
     required this.restaurant,
   });
 
-  final Restaurant restaurant;
+  @override
+  State<BodyOfDetailScreenWidget> createState() =>
+      _BodyOfDetailScreenWidgetState();
+}
+
+class _BodyOfDetailScreenWidgetState extends State<BodyOfDetailScreenWidget> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<AddReviewProvider>(context, listen: false)
+          .setReviews(widget.restaurant.customerReviews);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final reviewProvider =
+        Provider.of<AddReviewProvider>(context, listen: false);
+
     return SingleChildScrollView(
       child: SafeArea(
         child: Padding(
@@ -24,9 +44,9 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
             children: [
               Center(
                 child: Hero(
-                  tag: 'restaurant-image-${restaurant.id}',
+                  tag: 'restaurant-image-${widget.restaurant.id}',
                   child: Image.network(
-                    restaurant.imageUrllarge,
+                    widget.restaurant.imageUrllarge,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -40,7 +60,7 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        restaurant.name,
+                        widget.restaurant.name,
                         style: regularTextStyle.copyWith(
                             fontSize: 28, fontWeight: FontWeight.bold),
                       ),
@@ -54,7 +74,7 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                             width: 8,
                           ),
                           Text(
-                            restaurant.city,
+                            widget.restaurant.city,
                             style: regularTextStyle.copyWith(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -63,11 +83,12 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        restaurant.address,
+                        widget.restaurant.address,
                         style: regularTextStyle.copyWith(fontSize: 16),
                       ),
                       const SizedBox(height: 8),
-                      CategoryCard(categories: restaurant.categories ?? []),
+                      CategoryCard(
+                          categories: widget.restaurant.categories ?? []),
                     ],
                   ),
                   Row(
@@ -79,7 +100,7 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                       ),
                       const SizedBox.square(dimension: 9),
                       Text(
-                        restaurant.rating.toString(),
+                        widget.restaurant.rating.toString(),
                         style: regularTextStyle.copyWith(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       )
@@ -89,7 +110,7 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
               ),
               const SizedBox.square(dimension: 8),
               Text(
-                restaurant.description,
+                widget.restaurant.description,
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.justify,
                 overflow: TextOverflow.ellipsis,
@@ -98,8 +119,27 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
               const SizedBox(
                 height: 12,
               ),
-              MenuCard(menus: restaurant.menus),
-              ReviewCard(reviews: restaurant.customerReviews),
+              MenuCard(menus: widget.restaurant.menus),
+              ReviewCard(reviews: context.watch<AddReviewProvider>().reviews),
+              AddReviewForm(
+                onSubmit: (
+                  name,
+                  review,
+                ) async {
+                  try {
+                    await reviewProvider.addReview(
+                        widget.restaurant.id, name, review);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Review berhasil ditambahkan!')),
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Gagal menambahkan review: $e')),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),
