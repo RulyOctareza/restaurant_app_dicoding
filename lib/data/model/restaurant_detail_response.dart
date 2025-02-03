@@ -11,8 +11,6 @@ class RestaurantDetailResponse {
     required this.restaurant,
   });
 
-  // String toJson() => json.encode(toMap());
-
   factory RestaurantDetailResponse.fromJson(Map<String, dynamic> json) =>
       RestaurantDetailResponse(
           error: json["error"],
