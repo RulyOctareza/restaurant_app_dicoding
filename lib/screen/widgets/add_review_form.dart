@@ -21,9 +21,9 @@ class _AddReviewFormState extends State<AddReviewForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Add reviews: ',
+          const Text('Add reviews : ',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               )),
           const SizedBox(
