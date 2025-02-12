@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/model/restaurant/restaurant_model.dart';
+import 'package:restaurant_app/provider/favorite/favorite_restaurant_provider.dart';
 import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
 import 'package:restaurant_app/screen/detail/body_of_detail_screen_widget.dart';
 import 'package:restaurant_app/static/restaurant_detail_result_state.dart';
@@ -9,7 +11,11 @@ import '../Error/error_page.dart';
 
 class DetailScreen extends StatefulWidget {
   final String restaurantId;
-  const DetailScreen({super.key, required this.restaurantId});
+
+  const DetailScreen({
+    super.key,
+    required this.restaurantId,
+  });
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/database/database_helper.dart';
 import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
+import 'package:restaurant_app/provider/favorite/favorite_restaurant_provider.dart';
 import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
 import 'package:restaurant_app/provider/reviews/add_review_provider.dart';
 import 'package:restaurant_app/provider/search/restaurant_search_provider.dart';
@@ -24,6 +26,8 @@ void main() {
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
         ),
+        ChangeNotifierProvider(
+            create: (_) => FavoriteProvider(databaseHelper: DatabaseHelper())),
         ChangeNotifierProvider(create: (_) => SearchProvider()),
         ChangeNotifierProvider(create: (_) => AddReviewProvider()),
         Provider(

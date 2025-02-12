@@ -12,7 +12,7 @@ class ApiServices {
     try {
       final response = await http
           .get(Uri.parse('$_baseUrl/list'))
-          .timeout(const Duration(seconds: 10));
+          .timeout(const Duration(seconds: 30));
 
       if (response.statusCode == 200) {
         return RestaurantListResponse.fromJson(jsonDecode(response.body));
@@ -35,7 +35,7 @@ class ApiServices {
       final url = "$_baseUrl/detail/$id";
 
       final response =
-          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 30));
 
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);

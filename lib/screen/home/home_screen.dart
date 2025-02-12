@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
+import 'package:restaurant_app/screen/favorite/favorite_restaurant_screen.dart';
 import 'package:restaurant_app/screen/home/restaurant_card_widgets.dart';
 import 'package:restaurant_app/static/restaurant_list_result_state.dart';
 import 'package:restaurant_app/provider/theme/theme_provider.dart';
@@ -40,6 +41,15 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(Icons.search),
             onPressed: () {
               Navigator.pushNamed(context, '/searchpage');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FavoriteScreen()),
+              );
             },
           ),
           IconButton(
