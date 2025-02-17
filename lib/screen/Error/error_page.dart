@@ -23,9 +23,9 @@ class ErrorPage extends StatelessWidget {
               color: Colors.red,
             ),
             const SizedBox(height: 16),
-            Text(
-              errorMessage,
-              style: const TextStyle(fontSize: 18),
+            const Text(
+              "Periksa Jaringan Anda",
+              style: TextStyle(fontSize: 18),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),

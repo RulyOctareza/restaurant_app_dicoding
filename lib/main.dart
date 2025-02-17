@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/database/database_helper.dart';
 import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/provider/favorite/favorite_restaurant_provider.dart';
 import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
 import 'package:restaurant_app/provider/notification/local_notification_provider.dart';
+import 'package:restaurant_app/provider/notification/notification_provider.dart';
 import 'package:restaurant_app/provider/notification/payload_provider.dart';
 import 'package:restaurant_app/provider/reviews/add_review_provider.dart';
 import 'package:restaurant_app/provider/search/restaurant_search_provider.dart';
@@ -74,6 +76,12 @@ void main() async {
           create: (context) => LocalNotificationProvider(
             context.read<LocalNotificationService>(),
           )..requestPermissions(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NotificationProvider(
+            flutterLocalNotificationsPlugin: FlutterLocalNotificationsPlugin(),
+            apiServices: ApiServices(),
+          ),
         ),
         ChangeNotifierProvider(
           create: (context) => PayloadProvider(

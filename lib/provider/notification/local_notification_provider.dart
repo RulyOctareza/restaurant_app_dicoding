@@ -11,6 +11,7 @@ class LocalNotificationProvider extends ChangeNotifier {
 
   LocalNotificationProvider(this.flutterNotificationService);
 
+  //final int _notificationId = 0;
   bool? _permission = false;
   bool? get permission => _permission;
 

@@ -160,6 +160,4 @@ Future<void> showNotificationNow({
   );
 }
 
-void backgroundHandler(NotificationResponse notificationResponse) {
-  print("Received background notification: ${notificationResponse.payload}");
-}
+void backgroundHandler(NotificationResponse notificationResponse) {}

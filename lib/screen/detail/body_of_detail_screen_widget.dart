@@ -61,7 +61,9 @@ class _BodyOfDetailScreenWidgetState extends State<BodyOfDetailScreenWidget> {
                       ),
                     ),
                   ),
-                  const SizedBox.square(dimension: 16),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,8 +76,51 @@ class _BodyOfDetailScreenWidgetState extends State<BodyOfDetailScreenWidget> {
                               Text(
                                 widget.restaurant.name,
                                 style: regularTextStyle.copyWith(
-                                    fontSize: 28, fontWeight: FontWeight.bold),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/icon_star.png',
+                                width: 26,
+                                height: 26,
+                              ),
+                              const SizedBox.square(dimension: 9),
+                              Text(
+                                widget.restaurant.rating.toString(),
+                                style: regularTextStyle.copyWith(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Icon(Icons.location_on),
+                              const SizedBox(width: 8),
+                              Text(
+                                widget.restaurant.city,
+                                style: regularTextStyle.copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            widget.restaurant.address,
+                            style: regularTextStyle.copyWith(fontSize: 16),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              CategoryCard(
+                                  categories:
+                                      widget.restaurant.categories ?? []),
                               IconButton(
                                 icon: Icon(
                                   isFavorited
@@ -102,42 +147,6 @@ class _BodyOfDetailScreenWidgetState extends State<BodyOfDetailScreenWidget> {
                                 },
                               ),
                             ],
-                          ),
-                          const SizedBox(height: 5),
-                          Row(
-                            children: [
-                              const Icon(Icons.location_on),
-                              const SizedBox(width: 8),
-                              Text(
-                                widget.restaurant.city,
-                                style: regularTextStyle.copyWith(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            widget.restaurant.address,
-                            style: regularTextStyle.copyWith(fontSize: 16),
-                          ),
-                          const SizedBox(height: 8),
-                          CategoryCard(
-                              categories: widget.restaurant.categories ?? []),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/icon_star.png',
-                            width: 26,
-                            height: 26,
-                          ),
-                          const SizedBox.square(dimension: 9),
-                          Text(
-                            widget.restaurant.rating.toString(),
-                            style: regularTextStyle.copyWith(
-                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
