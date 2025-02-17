@@ -16,4 +16,6 @@ class RestaurantListLoadedState extends RestaurantListResultState {
   final List<Restaurant> data;
 
   RestaurantListLoadedState(this.data);
+
+  get restaurants => null;
 }

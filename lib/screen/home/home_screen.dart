@@ -6,6 +6,7 @@ import 'package:restaurant_app/screen/home/restaurant_card_widgets.dart';
 import 'package:restaurant_app/static/restaurant_list_result_state.dart';
 import 'package:restaurant_app/provider/theme/theme_provider.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
+import '../../provider/notification/local_notification_provider.dart';
 import '../Error/error_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,6 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _requestPermission();
+    });
 
     Future.microtask(() async {
       if (!mounted) {
@@ -26,6 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
       }
       await context.read<RestaurantListProvider>().fetchRestaurantList();
     });
+  }
+
+  Future<void> _requestPermission() async {
+    context.read<LocalNotificationProvider>().requestPermissions();
   }
 
   @override
@@ -60,6 +68,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ? const Icon(Icons.dark_mode)
                 : const Icon(Icons.light_mode),
           ),
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/setting');
+              },
+              icon: const Icon(Icons.settings))
         ],
       ),
       body: Consumer<RestaurantListProvider>(
