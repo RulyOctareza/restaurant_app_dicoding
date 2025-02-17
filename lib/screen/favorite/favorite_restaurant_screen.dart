@@ -22,9 +22,14 @@ class FavoriteScreen extends StatelessWidget {
               final restaurant = favoriteProvider.favoriteRestaurants[index];
               return ListTile(
                 leading: Image.network(restaurant.pictureUrl,
-                    width: 50, height: 50, fit: BoxFit.cover),
+                    width: 70, height: 70, fit: BoxFit.cover),
                 title: Text(restaurant.name),
-                subtitle: Text(restaurant.city),
+                subtitle: Row(
+                  children: [
+                    Text(restaurant.city),
+                    Text((restaurant.rating.toString())),
+                  ],
+                ),
                 trailing: IconButton(
                   icon: const Icon(Icons.delete, color: Colors.red),
                   onPressed: () {
