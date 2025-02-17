@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
 import 'package:restaurant_app/data/api/api_services.dart';
-import 'package:timezone/browser.dart';
 import 'dart:math';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -45,7 +43,7 @@ class NotificationProvider extends ChangeNotifier {
       onDidReceiveNotificationResponse: (NotificationResponse response) {},
     );
 
-    initializeTimeZone();
+    // initializeTimeZone();
   }
 
   Future<void> createNotificationChannel() async {
