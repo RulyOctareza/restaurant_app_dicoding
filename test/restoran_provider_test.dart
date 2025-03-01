@@ -17,7 +17,6 @@ void main() {
   late RestaurantListProvider provider;
   late MockApiServices mockApiService;
 
-  // Data dummy untuk testing
   final testRestaurant = Restaurant(
       id: "rqdv5juczeskfw1e867",
       name: "Melting Pot",
@@ -55,40 +54,31 @@ void main() {
     });
 
     test('should change state to loading when fetching data', () async {
-      // Arrange
       when(mockApiService.getRestaurantList())
           .thenAnswer((_) async => successResponse);
 
-      // Act
       provider.fetchRestaurantList();
 
-      // Assert
       expect(provider.resultState, isA<RestaurantListLoadingState>());
     });
 
     test('should have error state when API returns error', () async {
-      // Arrange
       when(mockApiService.getRestaurantList())
           .thenAnswer((_) async => errorResponse);
 
-      // Act
       await provider.fetchRestaurantList();
 
-      // Assert
       expect(provider.resultState, isA<RestaurantListErrorState>());
       final state = provider.resultState as RestaurantListErrorState;
       expect(state.error.toString(), "Failed to load data");
     });
 
     test('should have error state when exception occurs', () async {
-      // Arrange
       when(mockApiService.getRestaurantList())
           .thenThrow(Exception('No Internet Connection'));
 
-      // Act
       await provider.fetchRestaurantList();
 
-      // Assert
       expect(provider.resultState, isA<RestaurantListErrorState>());
       final state = provider.resultState as RestaurantListErrorState;
       expect(state.error.toString(), "Exception: No Internet Connection");

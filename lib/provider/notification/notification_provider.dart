@@ -43,7 +43,7 @@ class NotificationProvider extends ChangeNotifier {
       onDidReceiveNotificationResponse: (NotificationResponse response) {},
     );
 
-    // initializeTimeZone();
+    
   }
 
   Future<void> createNotificationChannel() async {

@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ class LocalNotificationProvider extends ChangeNotifier {
 
   LocalNotificationProvider(this.flutterNotificationService);
 
-  //final int _notificationId = 0;
   bool? _permission = false;
   bool? get permission => _permission;
 
@@ -26,26 +24,23 @@ class LocalNotificationProvider extends ChangeNotifier {
     required String title,
     required String body,
   }) async {
-    // Konversi DateTime ke TZDateTime
     final tz.TZDateTime scheduledTZTime =
         tz.TZDateTime.from(scheduledTime, tz.local);
 
-    // Atur notifikasi
     await flutterLocalNotificationsPlugin.zonedSchedule(
-      0, // ID notifikasi
-      title, // Judul notifikasi
-      body, // Pesan notifikasi
-      scheduledTZTime, // Waktu notifikasi dalam TZDateTime
+      0,
+      title,
+      body,
+      scheduledTZTime,
       const NotificationDetails(
         android: AndroidNotificationDetails(
-          'meal_reminder_channel', // ID channel
-          'Meal Reminder', // Nama channel
+          'meal_reminder_channel',
+          'Meal Reminder',
           importance: Importance.high,
           priority: Priority.high,
         ),
       ),
-      androidScheduleMode:
-          AndroidScheduleMode.exactAllowWhileIdle, // Jadwalkan notifikasi
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
