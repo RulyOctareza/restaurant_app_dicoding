@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/preview/hero.png" alt="Restaurant App — ilustrasi aplikasi katalog restoran" width="100%">
+  <img src="docs/preview/hero.svg" alt="Restaurant App — ilustrasi aplikasi katalog restoran" width="100%">
 </p>
 
 <h1 align="center">Restaurant App</h1>
